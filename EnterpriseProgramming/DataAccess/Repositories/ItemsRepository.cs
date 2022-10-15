@@ -7,22 +7,22 @@ using System.Text;
 
 namespace DataAccess.Repositories
 {
-    class ItemsRepository
+    public class ItemsRepository
     {
-        private ShoppingCartContext context;
-        public ItemsRepository(ShoppingCartContext _context)
+        private readonly ShoppingCartContext _context;
+        public ItemsRepository(ShoppingCartContext context)
         {
-            this.context = _context;
+            _context = context;
         }
         public void AddItem(Item i)
         {
-            context.Items.Add(i);
-            context.SaveChanges();
+            _context.Items.Add(i);
+            _context.SaveChanges();
         }
 
         public void DeleteItem(Item i)
         {
-            context.Items.Remove(i);
+            _context.Items.Remove(i);
         }
 
         public Item GetItem(int id)
@@ -32,7 +32,7 @@ namespace DataAccess.Repositories
 
         public IQueryable<Item> GetItems()
         {
-            return null;
+            return new List<Item>().AsQueryable();
         }
 
         public void UpdateItem(Item originalItem, Item newItem)
