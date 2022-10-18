@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using BusinessLogic.ViewModels;
 
 namespace BusinessLogic.Services
 {
@@ -33,6 +34,32 @@ namespace BusinessLogic.Services
         public void DeleteItem(int id)
         {
             
+        }
+
+        public IQueryable<ItemViewModel> ListItems()
+        {
+            var list = from i in _itemsRepository.GetItems()
+                       select new ItemViewModel()
+                       {
+                           Id = i.Id,
+                           ImagePath = i.ImagePath,
+                           Name = i.Name,
+                           Price = i.Price,
+                           Stock = i.Stock,
+                           Category = i.Category.Title
+                       };
+            
+            return list;
+        }
+
+        public IQueryable<ItemViewModel> Search(string name)
+        {
+            return ListItems().Where(i => i.Name.Contains(name));
+        }
+
+        public IQueryable<ItemViewModel> Search(string name, double minPrice, double maxPrice)
+        {
+            return Search(name).Where(i => i.Price >= minPrice && i.Price <= maxPrice);
         }
     }
 }

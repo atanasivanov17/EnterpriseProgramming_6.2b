@@ -1,4 +1,6 @@
+using BusinessLogic.Services;
 using DataAccess.Context;
+using DataAccess.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -37,6 +39,9 @@ namespace WebApplication
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddScoped<ItemsRepository>();
+            services.AddScoped<ItemsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
