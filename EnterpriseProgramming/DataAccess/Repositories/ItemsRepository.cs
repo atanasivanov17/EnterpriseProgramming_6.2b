@@ -26,11 +26,6 @@ namespace DataAccess.Repositories
             _context.SaveChanges();
         }
 
-        public Item GetItem(int id)
-        {
-            return null;
-        }
-
         public IQueryable<Item> GetItems()
         {
             return _context.Items;

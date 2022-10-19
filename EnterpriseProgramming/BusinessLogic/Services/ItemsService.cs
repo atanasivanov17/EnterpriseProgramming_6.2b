@@ -52,6 +52,11 @@ namespace BusinessLogic.Services
             return list;
         }
 
+        public ItemViewModel GetItem(int id)
+        {
+            return ListItems().SingleOrDefault(i => i.Id == id);
+        }
+
         public IQueryable<ItemViewModel> Search(string name)
         {
             return ListItems().Where(i => i.Name.Contains(name));

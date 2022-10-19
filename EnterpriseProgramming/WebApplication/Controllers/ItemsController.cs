@@ -47,5 +47,27 @@ namespace WebApplication.Controllers
             var list = _itemsService.ListItems();
             return View(list);
         }
+
+        public IActionResult Details(int id)
+        {
+            var item =_itemsService.GetItem(id);
+
+            if(item == null)
+            {
+                ViewBag.Error = "Item was not found";
+                var list = _itemsService.ListItems();
+                return View("List", list);
+            }
+            else
+            {
+                return View(item);
+            }
+        }
+
+        public IActionResult Search(string keyword)
+        {
+            var list = _itemsService.Search(keyword);
+            return View("List", list);
+        }
     }
 }
