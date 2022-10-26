@@ -32,17 +32,17 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @if (string.IsNullOrEmpty(ViewBag.Message) == false)
+            @if (TempData.ContainsKey("success"))
             {
                 <div class="alert alert-success" role="alert">
-                    @ViewBag.Message
+                    @TempData["success"].ToString();
                 </div>
             }
 
-            @if (string.IsNullOrEmpty(ViewBag.Error) == false)
+            @if (TempData.ContainsKey("error"))
             {
                 <div class="alert alert-danger" role="alert">
-                    @ViewBag.Error
+                    @TempData["error"].ToString();
                 </div>
             }
 

@@ -42,6 +42,8 @@ namespace WebApplication
 
             services.AddScoped<ItemsRepository>();
             services.AddScoped<ItemsService>();
+            services.AddScoped<CategoriesRepository>();
+            services.AddScoped<CategoriesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

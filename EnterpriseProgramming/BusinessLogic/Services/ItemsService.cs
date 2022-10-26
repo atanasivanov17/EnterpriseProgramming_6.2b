@@ -66,5 +66,12 @@ namespace BusinessLogic.Services
         {
             return Search(name).Where(i => i.Price >= minPrice && i.Price <= maxPrice);
         }
+
+        public IQueryable<ItemViewModel> SearchSortByPrice(string name, double minPrice, double maxPrice, bool ascending)
+        {
+            return ascending ? Search(name, minPrice, maxPrice).OrderBy(x => x.Price) :
+                   Search(name, minPrice, maxPrice).OrderByDescending(x => x.Price);
+        }
+
     }
 }
