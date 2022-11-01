@@ -1,6 +1,7 @@
 using BusinessLogic.Services;
 using DataAccess.Context;
 using DataAccess.Repositories;
+using Domain.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication.Data;
@@ -42,7 +44,10 @@ namespace WebApplication
 
             services.AddScoped<ItemsRepository>();
             services.AddScoped<ItemsService>();
-            services.AddScoped<CategoriesRepository>();
+
+            //FileInfo fi = new FileInfo(@"D:\Student\categories.txt");
+            //services.AddScoped<ICategoriesRepository, CategoriesFileRepository>(provider => new CategoriesFileRepository(fi));
+            services.AddScoped<ICategoriesRepository, CategoriesRepository>();
             services.AddScoped<CategoriesService>();
         }
 

@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.ViewModels;
 using DataAccess.Repositories;
+using Domain.Interfaces;
 using Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ namespace BusinessLogic.Services
 {
     public class CategoriesService
     {
-        private readonly CategoriesRepository _cr;
-        public CategoriesService(CategoriesRepository cr)
+        private readonly ICategoriesRepository _cr;
+        public CategoriesService(ICategoriesRepository cr)
         {
             _cr = cr;
         }
