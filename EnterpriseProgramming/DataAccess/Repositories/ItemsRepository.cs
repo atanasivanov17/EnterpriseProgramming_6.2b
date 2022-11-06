@@ -31,9 +31,15 @@ namespace DataAccess.Repositories
             return _context.Items;
         }
 
-        public void UpdateItem(Item originalItem, Item newItem)
+        public void Update(Item originalItem, Item newItem)
         {
+            originalItem.CategoryId = newItem.CategoryId;
+            originalItem.ImagePath = newItem.ImagePath;
+            originalItem.Name = newItem.Name;
+            originalItem.Price = newItem.Price;
+            originalItem.Stock = newItem.Stock;
 
+            _context.SaveChanges();
         }
     }
 }

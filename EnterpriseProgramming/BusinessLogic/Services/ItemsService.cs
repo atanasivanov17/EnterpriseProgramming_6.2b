@@ -33,7 +33,10 @@ namespace BusinessLogic.Services
 
         public void DeleteItem(int id)
         {
-            
+            var item = _itemsRepository.GetItems().SingleOrDefault(x => x.Id == id);
+            if(item != null)
+                _itemsRepository.DeleteItem(item);
+
         }
 
         public IQueryable<ItemViewModel> ListItems()
@@ -46,7 +49,8 @@ namespace BusinessLogic.Services
                            Name = i.Name,
                            Price = i.Price,
                            Stock = i.Stock,
-                           Category = i.Category.Title
+                           Category = i.Category.Title,
+                           CategoryId = i.Category.Id
                        };
             
             return list;
@@ -71,6 +75,21 @@ namespace BusinessLogic.Services
         {
             return ascending ? Search(name, minPrice, maxPrice).OrderBy(x => x.Price) :
                    Search(name, minPrice, maxPrice).OrderByDescending(x => x.Price);
+        }
+
+        public void UpdateItem(int id, string name, double price, int categoryId, int stock = 0, string imagePath = null)
+        {
+            var item = _itemsRepository.GetItems().SingleOrDefault(x => x.Id == id);
+            if (item != null)
+                _itemsRepository.Update(item, new Domain.Models.Item()
+                {
+                    CategoryId = categoryId,
+                    Id = id,
+                    Name = name,
+                    Price = price,
+                    ImagePath = imagePath,
+                    Stock = stock
+                });
         }
 
     }
